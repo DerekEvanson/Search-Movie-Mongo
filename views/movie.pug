@@ -1,0 +1,56 @@
+extends base
+
+block content
+  br
+  .container
+    .jumbotron
+      #movie.well
+        .row
+          .col-md-4
+            img.thumbnail(src= movie.Poster)
+          .col-md-8
+            h2= movie.Title
+            ul.list-group
+            li.list-group-item
+              strong Genre:
+              |  #{movie.Genre}
+            li.list-group-item
+              strong Released:
+              |  #{movie.Released}
+            li.list-group-item
+              strong Rated:
+              |  #{movie.Rated}
+            li.list-group-item
+              strong IMDB Rating:
+              |  #{movie.imdbRating}
+            li.list-group-item
+              strong Director:
+              |  #{movie.Director}
+            li.list-group-item
+              strong Writer:
+              |  #{movie.Writer}
+            li.list-group-item
+              strong Actors:
+              |  #{movie.Actors}
+            li.list-group-item
+              strong Plot:
+              |  #{movie.Plot}
+            br
+            p(style='float: right;')
+              form(action=`/api/v1/favorites/${movie.imdbID}` method='post')
+                button.btn.btn-primary(type='submit' style="float: right; margin:5px;") Favorite
+              a.btn.btn-primary(href=`http://imdb.com/title/${movie.imdbID}` target='_blank' style="margin:5px;") View IMDB
+            p
+  br
+  .container
+    #comments
+  br
+  .container
+    .jumbotron
+      form(action=`/api/v1/comments/${movie.imdbID}` method='post' )
+        label(for='exampleFormControlInput1') Name
+        input.form-control(type='text' name='authorName' placeholder='John Doe...')
+        label(for='exampleFormControlTextarea1') Comment
+        textarea.form-control(type='text' name='text' placeholder='Your text...' rows='3')
+        br
+        button.btn.btn-outline-success.my-2.my-sm-0(style='float: right;' type='submit') Submit

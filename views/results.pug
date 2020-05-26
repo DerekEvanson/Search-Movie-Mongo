@@ -1,0 +1,15 @@
+extends base
+
+block content
+  br
+  .container
+    #movies.row
+      each movie in results
+        .col-md-3(style='height: 390px;')
+          img(src= movie.Poster)
+          h5= movie.Title
+          p(style='float: right;')
+            a.btn.btn-primary(href=`/movie/${movie.imdbID}` style="margin:5px;") Details 
+            form(action=`/api/v1/favorites/${movie.imdbID}` method='post')
+              button.btn.btn-primary(type='submit' style="margin:5px;") Favorite
+   
